@@ -16,9 +16,6 @@ void update(int node,int start,int end, int index, int dif);
 //세그먼트 트리 합
 int sum(int node, int start, int end, int left, int right);
 
-
-출처: https://www.crocus.co.kr/648 [Crocus]
-
 int main(){
 	
 	//리프노드의 개수
@@ -45,7 +42,7 @@ int main(){
 	
 	init(node,start,end);
 	
-	for(int i=1;i<8;i++){
+	for(int i=1;i<tree_size;i++){
 		cout << tree[i] << " ";
 	}
 	
@@ -94,5 +91,5 @@ int sum(int node, int start, int end, int left, int right)
         return tree[node];
 	//구하고자 하는 범위가 구간합 내부에 걸쳐있거나 완전히 포함하는 경우 재탐색
     int mid = (start + end) / 2;
-    return sum(tree, node * 2, start, mid, left, right) + sum(tree, node*2+1, mid+1, end, left, right);
+    return sum( node * 2, start, mid, left, right) + sum( node*2+1, mid+1, end, left, right);
 }
