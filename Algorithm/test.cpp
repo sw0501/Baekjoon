@@ -1,112 +1,56 @@
-#include<iostream>
-#include<algorithm>
-#include<queue>
-#include<utility>
+#include <iostream> 
+#include <vector> 
+#include <algorithm> 
+using namespace std; 
 
-using namespace std;
+int n, s; 
+vector<int> v; 
+vector<int> v1, v2; 
+int temp; 
 
-int T;				//테스트케이스
-void init();
-void BFS(int a,int b);
-int D(int x);
-int S(int x);
-int L(int x);
-int R(int x);
+void dfs(int index, int sum, int end, vector<int> &a) { 
+    if (index == end) { a.push_back(sum); return; } 
+    dfs(index + 1, sum, end, a); 
+    dfs(index + 1, sum + v[index], end, a); 
+} 
 
-int main(){
-	
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	init();
-	
-	
-	return 0;
+long long moveRight(vector<int> &a, int index) { 
+    //같은 수가 몇개인지 리턴 
+    long long ans = 1; if (index == a.size() - 1) return ans; 
+    while (a[index] == a[index + 1]) { 
+        ans++; index++; if (index == a.size() - 1) return ans; 
+    } return ans; 
+} 
+int main(void) { 
+    cin.tie(nullptr); 
+    cout.tie(nullptr); 
+    ios_base::sync_with_stdio(false); 
+    cin >> n >> s; 
+    for (int i = 0; i < n; ++i) { 
+        int num; cin >> num; v.push_back(num); 
+    } //부분수열의 합을 둘로 나눠서 각각 구한후 정렬. 
+    dfs(0, 0, n / 2, v1); 
+    dfs(n / 2, 0, n, v2); 
+    long long ans = 0; 
+    int start1 = 0; 
+    int start2 = 0; 
+    sort(v1.begin(), v1.end()); 
+    sort(v2.begin(), v2.end()); 
+    reverse(v2.begin(), v2.end()); 
+    while (start1 < v1.size() && start2 < v2.size()) { 
+        int sum = v1[start1] + v2[start2]; if (sum == s) { 
+            long long s1 = moveRight(v1, start1); 
+            long long s2 = moveRight(v2, start2); start1 += s1; 
+            start2 += s2; ans += s1 * s2; 
+            //같은 수가 여러개 일경우 곱 
+        } 
+        else if (sum > s) { 
+            long long s2 = moveRight(v2, start2); start2 += s2; 
+        } 
+        else { 
+            long long s1 = moveRight(v1, start1); start1 += s1; 
+        } 
+    } if (s == 0) ans--; 
+    cout << ans; 
 }
 
-void init(){
-	//최소횟수를 구하는 문제 : BFS
-	cin >> T;
-	int a,b;	//a:초기값 b:최종값
-	for(int i=0;i<T;i++){
-		cin >> a >> b;
-		BFS(a,b);
-	}
-}
-
-void BFS(int a,int b){
-	int temp = S(a);
-	cout << temp << " ";
-	temp = D(temp);
-	cout << temp << " ";
-	temp = R(temp);
-	cout << temp << " ";
-	temp = D(temp);
-	cout << temp << " ";
-	temp = D(temp);
-	cout << temp << " ";
-	temp = S(temp);
-	cout << temp << " ";
-	temp = D(temp);
-	cout << temp << " ";
-	temp = R(temp);
-	cout << temp << " ";
-	temp = R(temp);
-	cout << temp << " ";
-}
-
-int D(int x){
-	
-	if(2*x>9999)return (2*x)%10000;
-	return x;
-}
-
-int S(int x){
-	if(x==0)return 9999;
-	return x-1;
-}
-
-int L(int x){
-	int n[4]={0,};
-	for(int i=3;i>=0;i--){
-		n[i] = x%10;
-		x/=10;
-	}
-	
-	int temp = n[0];
-	
-	n[0] = n[1];
-	n[1] = n[2];
-	n[2] = n[3];
-	n[3] = temp;
-	
-	x=0;
-	for(int i=0;i<4;i++){
-		x*=10;
-		x+=n[i];
-	}
-	return x;
-}
-
-int R(int x){
-	int n[4]={0,};
-	for(int i=3;i>=0;i--){
-		n[i] = x%10;
-		x/=10;
-	}
-	
-	int temp = n[3];
-	
-	n[3] = n[2];
-	n[2] = n[1];
-	n[1] = n[0];
-	n[0] = temp;
-	
-	x=0;
-	for(int i=0;i<4;i++){
-		x*=10;
-		x+=n[i];
-	}
-	return x;
-}

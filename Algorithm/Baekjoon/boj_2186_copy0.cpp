@@ -21,7 +21,7 @@ int main(){
 	cin.tie(NULL);
 	cout.tie(NULL);
 	
-	fill(DP[0],-1,sizeof(DP));
+	//fill_n(DP,sizeof(DP),-1);
 	
 	init();
 	
