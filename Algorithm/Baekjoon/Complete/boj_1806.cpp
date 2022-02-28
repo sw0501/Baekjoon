@@ -38,18 +38,25 @@ void init(){
 	int ans = N;
 	int flag = 0;
 	
-	for(int i=1;i<N;i++){
-		p2++;
-		sum += *p2;
-		if(sum>=S){
-			flag = 1;
-			while(sum-*p1>=S){
-				sum -= *p1;
-				p1++;
+	if(sum>=S){
+		flag =1;
+		ans = 1;
+	}
+	else{
+		for(int i=1;i<N;i++){
+			p2++;
+			sum += *p2;
+			if(sum>=S){
+				flag = 1;
+				while(sum-*p1>=S){
+					sum -= *p1;
+					p1++;
+				}
+				ans = (ans>p2-p1+1?p2-p1+1:ans);
 			}
-			ans = (ans>p2-p1+1?p2-p1+1:ans);
 		}
 	}
+	
 	
 	if(flag)cout << ans << "\n";
 	else cout << 0 << "\n";

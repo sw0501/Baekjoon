@@ -4,7 +4,7 @@
 
 using namespace std;
 
-vector<int>arr(4);		//처음에 입력받아서 생긴 배열
+vector<int>arr(4);	//처음에 입력받아서 생긴 배열
 vector<int>tree(8);	//세그먼트 트리가 만들어지는 배열
 
 //세그먼트 트리 초기화

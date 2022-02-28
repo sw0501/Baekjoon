@@ -26,7 +26,10 @@ void init(){
 			cin >> cp[i][j];
 		}
 	}
-	cal(n);
+	if(n==1){
+		cout << cp[0][0] << "\n";
+	}
+	else cal(n);
 	
 }
 
@@ -47,7 +50,7 @@ void cal(int n){
 				dp[i][j] = max(dp[i-1][j-1],dp[i-1][j]) + cp[i][j];
 			}
 			
-			//cout << dp[i][j] << " ";
+			//cout << i << " " << j << " " << dp[i][j] << "\n";
 			//마지막 열
 			if(i==n-1){
 				answer = max(answer,dp[i][j]);
@@ -55,5 +58,5 @@ void cal(int n){
 		}
 		//cout << "\n";
 	}
-	cout << answer;
+	cout << answer << "\n";
 }

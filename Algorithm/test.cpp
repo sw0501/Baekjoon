@@ -1,12 +1,24 @@
-#include<iostream>
-
+#include <bits/stdc++.h>
+#include "List.h"
 using namespace std;
 
+void init();
+
 int main(){
-    
-    long long N;
-    cin >> N;
-    cout << (int)(N*(1-0.22)) << " " << (int)(N*0.8 + N*0.2*(1-0.22));
-    
-    return 0;
+	
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	init();
+	
+	
+	return 0;
+}
+
+void init(){ 
+	int i=0;
+	for(i=0;i<5;i++)
+		addrear(i);
+	printlist(pStart);
 }
