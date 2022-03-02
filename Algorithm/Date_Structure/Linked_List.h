@@ -3,8 +3,7 @@
 
 struct Node {
 	int data;	
-	struct Node *next;	//
-	struct Node *prev;	//
+	struct Node *next; 
 };
 
 struct Node *pStart = NULL;		//리스트의 첫 노드의 포인터
@@ -16,7 +15,6 @@ void addrear(int val /*노드에 저장할 데이터 값*/){
 	Current = (struct Node *) malloc(sizeof(struct Node));	//노드의 크기만큼 동적할당 해준다.
 	Current->data = val;	//새로 생성한 노드에 데이터를 저장
 	Current->next = NULL;	//새로 생성한 노드에 다음 주소 저장
-	Current->pre = NULL;
 	
 	//노드를 처음 생성하는 경우
 	if(pStart == NULL)
@@ -26,7 +24,6 @@ void addrear(int val /*노드에 저장할 데이터 값*/){
 	else{	//current[0] -> current[1] 
 		pEnd->next = Current;	//Current[1]->next = Current[2]
 		pEnd = Current;	//마지막 노드 = Current[2]
-		Current->prev = pEnd;
 	}
 }
 
@@ -52,14 +49,4 @@ void printI(struct Node *Current,int I){
 		Current = Current->next;
 		j++;
 	}
-}
-
-int main(){
-	
-	for(int i=0;i<N;i++){
-		
-	}
-	
-	
-	return 0;
 }
