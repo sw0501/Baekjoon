@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void strcopy(char *a,char *b);
+void strcopy(char a[],char b[]);
 
 int main(){
 	
@@ -22,7 +22,7 @@ int main(){
 	return 0;
 }
 
-void strcopy(char *a,char *b){
+void strcopy(char a[],char b[]){
 	
 	char *pa = a;
 	char *pb = b;
