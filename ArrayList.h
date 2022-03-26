@@ -5,7 +5,7 @@
 #define FALSE		0
 
 #define	LIST_LEN	100
-typedef	int LData;
+typedef char LData;
 
 typedef struct	__ArrayList
 {

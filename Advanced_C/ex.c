@@ -1,4 +1,6 @@
 #include <stdio.h>	//기본입출력 헤더
+#include <string.h>	//string 헤더
+#include <stdlib.h>	//기본 라이브러리 제공 헤더
 #pragma warning(disalbe 4996)	//OJ에러방지용 코드
 
 
