@@ -7,8 +7,8 @@
 - [X] solved Platinum 티어 
 
 ## 목표
-- [ ] CLASS 2단계 문제 
-- [ ] CLASS 3단계 문제 
+- [X] CLASS 2단계 문제 
+- [X] CLASS 3단계 문제 
 - [ ] CLASS 4단계 문제 
 - [ ] CLASS 5단계 문제 
 - [ ] 단계별로 풀기 
