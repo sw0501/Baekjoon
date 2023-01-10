@@ -1,59 +1,74 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include<vector>
+#include<stack>
+//#include <list> //연결리스트 모듈
+//#include <unordered_set> //세트 모듈
 
 using namespace std;
 
-void init();
+//스택 문제를 연결리스트로 구현하지 않고 걍 vector로 쉽게 푸는게
+//양심에 찔리지만 코테도 뭐 이렇게 하지 않을까..?
 
-int N;
-vector<int>seq;
-int CK[100001] = {0,};
-stack<int>st;
-queue<char>answer;
+//https://cocoon1787.tistory.com/231
+//https://travelbeeee.tistory.com/69
 
-int main(){
-	
-	/*
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	*/
-	
-	init();
-	
-	
-	return 0;
-}
+int main()
+{
+   ios_base::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
 
-void init(){
-	int flag = 1;
-	cin >> N;
-	for(int i=0;i<N;i++){
-		int num;
-		cin >> num;
-		seq.push_back(num);
-	}
-	
-	int idx = 0;	//수열의 인덱스 표시
-	
-	for(int i=1;i<=N;i++){
-		st.push(i);
-		answer.push('+');
-		while(!st.empty()){
-			//수열의 수일 경우 팝
-			if(st.top()==seq[idx]){
-				st.pop();
-				answer.push('-');
-				idx++;
-			}
-			else break;
-		}
-	}
-	
-	if(st.empty()){
-		while(!answer.empty()){
-			cout << answer.front() << "\n";
-			answer.pop();
-		}
-	}
-	else cout << "NO" << "\n";
+   stack<int> stack1;
+   vector<char> pm;
+   int n, i, j, input1;
+
+   cin >> n;
+
+   if (n > 100000)
+   {
+      return 0;
+   }
+
+
+   //int* seq = new int[n];
+   int seq[100001];
+
+   for (i = 0;i < n;i++)
+   {
+      cin >> seq[i];
+   }
+
+   int cnt1 = 1;
+
+   i = 0;
+   while (cnt1 <= n)
+   {
+      stack1.push(cnt1);
+      pm.push_back('+');
+
+      while (!stack1.empty())
+      {
+         if (stack1.top() == seq[i]) {
+            stack1.pop();
+            pm.push_back('-');
+            i++;
+         }
+         else break;
+      }
+      cnt1++;
+   }
+
+   if (!stack1.empty())
+   {
+      cout << "NO";
+   }
+   else
+   {
+      for (i = 0;i < pm.size();i++)
+      {
+          cout << pm[i] << "\n";
+      }
+   }
+   
+   return 0;
 }
