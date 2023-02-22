@@ -16,10 +16,10 @@ int LCM(int a,int b){
 }
 
 int solution(vector<int> arr) {
-    sort(arr.begin(),arr.end());
-    
+        
     int num = arr[0];
     for(int i=1;i<arr.size();i++){
+        //유클리드 호제법
         num = num * arr[i] / LCM(max(num,arr[i]),min(num,arr[i]));
     }
     
