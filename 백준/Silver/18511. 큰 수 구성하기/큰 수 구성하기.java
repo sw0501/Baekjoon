@@ -4,13 +4,11 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-	public static int ans = 0;
-	public static int N, K;
-	public static int[] arr;
-
+	public static int ans, N, K, arr[],temp;
+	
 	public static void recursive(int num) {
 		for (int i = 0; i < K; i++) {
-			int temp = num * 10 + arr[i];
+			temp = num * 10 + arr[i];
 			if(temp<=N) {
 				ans = (ans>temp?ans:temp);
 				recursive(temp);
@@ -19,6 +17,8 @@ public class Main {
 	}
 
 	public static void init() throws NumberFormatException, IOException {
+		ans = 0;
+		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 		StringTokenizer st = new StringTokenizer(in.readLine());
