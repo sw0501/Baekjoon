@@ -9,14 +9,12 @@ public class Main {
 	public static int[] arr;
 
 	public static void recursive(int num) {
-		if (num > N)
-			return;
-		else {
-			ans = (ans > num ? ans : num);
-		}
-
 		for (int i = 0; i < K; i++) {
-			recursive(num * 10 + arr[i]);
+			int temp = num * 10 + arr[i];
+			if(temp<=N) {
+				ans = (ans>temp?ans:temp);
+				recursive(temp);
+			}
 		}
 	}
 
