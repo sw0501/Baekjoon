@@ -15,20 +15,17 @@ public class Main {
 
 	public static void bruteForce(int idx, int p, int f, int s, int v, int c) {
 		for (int i = idx; i <= N; i++) {
+			if (ans <= c + arr[i][4]) {
+				continue;
+			}
+			
 			tempList.add(i);
 			// 최소 영양소 만족할 때
 			if (p + arr[i][0] >= minN[0] && f + arr[i][1] >= minN[1] && s + arr[i][2] >= minN[2]
 					&& v + arr[i][3] >= minN[3]) {
-				// 최소 비용일 때
-				if (ans > c + arr[i][4]) {
-					list.clear();
-					list.addAll(tempList);
-					ans = c + arr[i][4];
-				}
-				else {
-					tempList.remove((Integer) i);
-					continue;
-				}
+				list.clear();
+				list.addAll(tempList);
+				ans = c + arr[i][4];
 			}
 			bruteForce(i + 1, p + arr[i][0], f + arr[i][1], s + arr[i][2], v + arr[i][3], c + arr[i][4]);
 			tempList.remove((Integer) i);
