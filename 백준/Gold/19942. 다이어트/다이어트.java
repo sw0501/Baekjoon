@@ -10,8 +10,8 @@ public class Main {
 	public static int[][] arr;
 	public static int[] minN;
 	public static int ans;
-	public static List<Integer>list;
-	public static List<Integer>tempList;
+	public static List<Integer> list;
+	public static List<Integer> tempList;
 
 	public static void bruteForce(int idx, int p, int f, int s, int v, int c) {
 		for (int i = idx; i <= N; i++) {
@@ -22,15 +22,16 @@ public class Main {
 				// 최소 비용일 때
 				if (ans > c + arr[i][4]) {
 					list.clear();
-					for(int num:tempList) {
-						list.add(num);
-					}
-					
+					list.addAll(tempList);
 					ans = c + arr[i][4];
 				}
+				else {
+					tempList.remove((Integer) i);
+					continue;
+				}
 			}
-			bruteForce(i+1,p + arr[i][0], f + arr[i][1], s + arr[i][2], v + arr[i][3], c + arr[i][4]);
-			tempList.remove((Integer)i);
+			bruteForce(i + 1, p + arr[i][0], f + arr[i][1], s + arr[i][2], v + arr[i][3], c + arr[i][4]);
+			tempList.remove((Integer) i);
 		}
 	}
 
@@ -64,7 +65,7 @@ public class Main {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 
 		init();
-		bruteForce(1,0, 0, 0, 0, 0);
+		bruteForce(1, 0, 0, 0, 0, 0);
 
 		if (ans == Integer.MAX_VALUE) {
 			System.out.println(-1);
