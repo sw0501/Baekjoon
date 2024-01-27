@@ -27,9 +27,7 @@ int main() {
 
 		long long int cnt = 0;
 		for (int i = 0; i < N; i++) {
-			//라면 3개씩 구매
 			if (i < N - 2) {
-				//개수 맞추기
 				if (A[i + 1] > A[i + 2]) {
 					cnt = min(A[i], A[i + 1] - A[i + 2]);
 					ans += cnt * 5;
@@ -47,7 +45,6 @@ int main() {
 				ans += cnt * 5;
 				A[i] -= cnt;
 				A[i + 1] -= cnt;
-				A[i + 2] -= cnt;
 			}
 			ans += A[i] * 3;
 			A[i] = 0;
