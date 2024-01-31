@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
@@ -15,19 +15,18 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		short[][] arr = new short[N + 1][N + 1];
 		int[][] DP = new int[N + 1][N + 1];
 
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j <= N; j++) {
-				arr[i][j] = (short)Integer.parseInt(st.nextToken());
-				DP[i][j] = DP[i][j - 1] + DP[i - 1][j] - DP[i - 1][j - 1] + arr[i][j];
+				DP[i][j] = (short)Integer.parseInt(st.nextToken());
+				DP[i][j] += DP[i][j - 1] + DP[i - 1][j] - DP[i - 1][j - 1];
 			}
 
 		}
 
-		int startX, startY, endX, endY;
+		int startX, startY, endX, endY, temp;
 		for (int i = 1; i <= M; i++) {
 			st = new StringTokenizer(br.readLine());
 			startX = Integer.parseInt(st.nextToken());
@@ -35,7 +34,7 @@ public class Main {
 			endX = Integer.parseInt(st.nextToken());
 			endY = Integer.parseInt(st.nextToken());
 
-			int temp = DP[endX][endY] - DP[startX - 1][endY] - DP[endX][startY - 1] + DP[startX - 1][startY - 1];
+			temp = DP[endX][endY] - DP[startX - 1][endY] - DP[endX][startY - 1] + DP[startX - 1][startY - 1];
 			sb.append(temp).append("\n");
 		}
 
