@@ -35,7 +35,8 @@ public class Main {
 			endX = Integer.parseInt(st.nextToken());
 			endY = Integer.parseInt(st.nextToken());
 
-			sb.append(DP[endX][endY] - DP[startX - 1][endY] - DP[endX][startY - 1] + DP[startX - 1][startY - 1])
+			int temp = DP[endX][endY] - DP[startX - 1][endY] - DP[endX][startY - 1] + DP[startX - 1][startY - 1];
+			sb.append(temp)
 					.append("\n");
 		}
 
