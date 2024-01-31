@@ -15,13 +15,13 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		int[][] arr = new int[N + 1][N + 1];
+		short[][] arr = new short[N + 1][N + 1];
 		int[][] DP = new int[N + 1][N + 1];
 
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j <= N; j++) {
-				arr[i][j] = Integer.parseInt(st.nextToken());
+				arr[i][j] = (short)Integer.parseInt(st.nextToken());
 				DP[i][j] = DP[i][j - 1] + DP[i - 1][j] - DP[i - 1][j - 1] + arr[i][j];
 			}
 
@@ -36,8 +36,7 @@ public class Main {
 			endY = Integer.parseInt(st.nextToken());
 
 			int temp = DP[endX][endY] - DP[startX - 1][endY] - DP[endX][startY - 1] + DP[startX - 1][startY - 1];
-			sb.append(temp)
-					.append("\n");
+			sb.append(temp).append("\n");
 		}
 
 		System.out.println(sb);
