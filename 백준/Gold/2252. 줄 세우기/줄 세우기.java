@@ -30,11 +30,8 @@ public class Main {
 			if (degree[i] == 0)
 				queue.add(i);
 		}
-
-		for (int i = 1; i <= N; i++) {
-			if (queue.isEmpty()) {
-				continue;
-			}
+		
+		while(!queue.isEmpty()) {
 			int x = queue.poll();
 			sb.append(x).append(" ");
 
@@ -44,6 +41,20 @@ public class Main {
 				}
 			}
 		}
+//
+//		for (int i = 1; i <= N; i++) {
+//			if (queue.isEmpty()) {
+//				continue;
+//			}
+//			int x = queue.poll();
+//			sb.append(x).append(" ");
+//
+//			for (int num : graph.get(x)) {
+//				if (--degree[num] == 0) {
+//					queue.add(num);
+//				}
+//			}
+//		}
 	}
 
 	public static void main(String[] args) throws IOException {
