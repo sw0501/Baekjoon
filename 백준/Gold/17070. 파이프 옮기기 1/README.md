@@ -4,11 +4,15 @@
 
 ### 성능 요약
 
-메모리: 2020 KB, 시간: 0 ms
+메모리: 11752 KB, 시간: 80 ms
 
 ### 분류
 
 다이나믹 프로그래밍, 그래프 이론, 그래프 탐색
+
+### 제출 일자
+
+2024년 2월 28일 13:59:47
 
 ### 문제 설명
 
@@ -38,7 +42,7 @@
 
 <p style="text-align: center;">세로</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 886px; height: 203px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/ace5e982-6a52-4982-b51d-6c33c6b742bf/-/preview/" style="width: 886px; height: 203px;"></p>
 
 <p style="text-align: center;">대각선</p>
 
