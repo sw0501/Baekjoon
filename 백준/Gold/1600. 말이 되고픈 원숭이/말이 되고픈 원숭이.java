@@ -20,7 +20,7 @@ public class Main {
 	static int K;
 	static int W, H;
 	static int board[][];
-	static int visit[][][][];
+	static int visit[][];
 
 	static class Pair {
 		int x, y, k, cnt;
@@ -54,7 +54,7 @@ public class Main {
 		H = Integer.parseInt(st.nextToken());
 
 		board = new int[H][W];
-		visit = new int[2][H][W][2];
+		visit = new int[H][W];
 
 		for (int i = 0; i < H; i++) {
 			st = new StringTokenizer(in.readLine());
@@ -63,29 +63,23 @@ public class Main {
 			}
 		}
 
-		Queue<Pair>queue = new LinkedList<>();
+		Queue<Pair> queue = new LinkedList<>();
 		queue.add(new Pair(0, 0, K, 0));
 
 		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++) {
-				visit[0][i][j][0] = Integer.MAX_VALUE;
-				visit[0][i][j][1] = -1;
-				visit[1][i][j][0] = Integer.MAX_VALUE;
-				visit[1][i][j][1] = -1;
+				visit[i][j] = -1;
 			}
 		}
 
-		visit[0][0][0][0] = 0;
-		visit[0][0][0][1] = K;
-		visit[1][0][0][0] = 0;
-		visit[1][0][0][1] = K;
+		visit[0][0] = K;
 
 		int ans = Integer.MAX_VALUE;
 
 		while (!queue.isEmpty()) {
 
 			Pair p = queue.poll();
-			//System.out.println(p.x + " " + p.y + " " + p.k + " " + p.cnt);
+			// System.out.println(p.x + " " + p.y + " " + p.k + " " + p.cnt);
 
 			if (p.x == W - 1 && p.y == H - 1) {
 				ans = Math.min(ans, p.cnt);
@@ -102,9 +96,8 @@ public class Main {
 					// 이동 가능한 공간인 경우
 					if (board[ty][tx] == 0) {
 						// 기존에 방문한 횟수보다 적거나 || 방문 횟수는 같고 K를 덜 사용한 경우
-						if (visit[0][ty][tx][1] < p.k) {
-							visit[0][ty][tx][0] = p.cnt;
-							visit[0][ty][tx][1] = p.k;
+						if (visit[ty][tx] < p.k) {
+							visit[ty][tx] = p.k;
 							queue.add(new Pair(tx, ty, p.k, p.cnt + 1));
 						}
 					}
@@ -120,9 +113,8 @@ public class Main {
 						// 이동 가능한 공간인 경우
 						if (board[ty][tx] == 0) {
 							// 기존에 방문한 횟수보다 적거나 || 방문 횟수는 같고 K를 덜 사용한 경우
-							if (visit[1][ty][tx][1] < p.k - 1) {								visit[1][ty][tx][0] = p.cnt;
-								visit[1][ty][tx][0] = p.cnt;
-								visit[1][ty][tx][1] = p.k - 1;
+							if (visit[ty][tx] < p.k - 1) {
+								visit[ty][tx] = p.k - 1;
 								queue.add(new Pair(tx, ty, p.k - 1, p.cnt + 1));
 							}
 						}
@@ -130,9 +122,9 @@ public class Main {
 				}
 			}
 		}
-		
-		if(ans==Integer.MAX_VALUE) {
-			ans=-1;
+
+		if (ans == Integer.MAX_VALUE) {
+			ans = -1;
 		}
 
 		System.out.println(ans);
