@@ -28,11 +28,10 @@ public class Main {
         	}
         }
         
-        for (int i = 1; i <= N; i++) {
-        	visited[i] = true;
-        	traverse(i, 1, i, 0);
-        	visited[i] = false;        	
-        }
+    
+    	visited[1] = true;
+    	traverse(1, 1, 1, 0);
+    	        	
         System.out.println(ans);
     }
     
