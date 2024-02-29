@@ -63,17 +63,7 @@ public class Main {
 			}
 		}
 
-		PriorityQueue<Pair> queue = new PriorityQueue<>(new Comparator<Pair>() {
-
-			@Override
-			public int compare(Pair o1, Pair o2) {
-				// TODO Auto-generated method stub
-				if (o1.cnt == o2.cnt) {
-					return -(o1.k - o2.k);
-				}
-				return o1.cnt - o2.cnt;
-			}
-		});
+		Queue<Pair>queue = new LinkedList<>();
 		queue.add(new Pair(0, 0, K, 0));
 
 		for (int i = 0; i < H; i++) {
