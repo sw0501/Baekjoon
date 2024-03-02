@@ -5,34 +5,33 @@
 using namespace std;
 
 int main() {
-    
+
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
-   
+
     long long int K;
     cin >> K;
 
     K = (K > 0 ? K : -K);
 
-    long long int t = 1;
-    int cnt = 0;
-    while (1) {
-        if (t - 1 > K) {
-            cout << -1 << "\n";
-            break;
-        }
-        else if(t-1 == K){
-            cout << cnt << "\n";
-            break;
-        }
-        t *= 2;
+    if (K == 0)
+    {
+        cout << 0 << "\n";
+        return 0;
+    }
+    if (K % 2 == 0) {
+        cout << -1 << "\n";
+        return 0;
+    }
+
+    long long int cnt = 0;
+    while (K > 0) {
+        K /= 2;
         cnt++;
     }
 
-    //1
-    //3
-    //7
-    //15
+    cout << cnt << "\n";
+
     return 0;
 }
