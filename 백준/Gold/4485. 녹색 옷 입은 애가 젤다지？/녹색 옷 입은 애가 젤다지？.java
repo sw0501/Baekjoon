@@ -5,88 +5,84 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
-	static int n;
-	static int[][] board;
-	static boolean[][] visited;
-	static int[][] dist;
-	static int[] ry = {0, 0, 1, -1};
-	static int[] rx = {1, -1, 0, 0};
-	static final int INF= 987654321;
-	static int answer;
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
-		int index = 1;
+
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringBuilder sb = new StringBuilder();
+	static StringTokenizer st = null;
+	static int N;
+	static int map[][] = new int[126][126];
+	static int dist[][] = new int[126][126];
+	static int dx[] = { 0, 0, 1, -1 };
+	static int dy[] = { 1, -1, 0, 0 };
+
+	public static class Pos implements Comparable<Pos>{
+		int x, y, cost;
+
+		public Pos(int x, int y, int cost) {
+			super();
+			this.x = x;
+			this.y = y;
+			this.cost = cost;
+		}
+
+		@Override
+		public int compareTo(Pos o) {
+			// TODO Auto-generated method stub
+			return o.cost - this.cost;
+		}
 		
-		while((n= Integer.parseInt(br.readLine())) != 0) {
-			board = new int[n][n];
-			dist = new int[n][n];
-			visited = new boolean[n][n];
-			answer = 0;
-			
-			for (int i = 0; i < n; i++) {
+		
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+		int idx = 1;
+
+		while (true) {
+			N = Integer.parseInt(br.readLine());
+			if (N == 0)
+				break;
+
+			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
-				for (int j = 0; j < n; j++) {
-					int num = Integer.parseInt(st.nextToken());
-					board[i][j] = num;
+				for (int j = 0; j < N; j++) {
+					dist[i][j] = 125*9;
+					map[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			
-			answer = dijkstra(new int[] {0, 0});
-			
-			sb.append("Problem ");
-			sb.append(index);
-			sb.append(": ");
-			sb.append(answer).append("\n");
-			
-			index ++;
+
+			sb.append("Problem ").append(idx++).append(": ").append(dijkstra()).append("\n");
+
 		}
-		
 		System.out.println(sb);
-		
 	}
-	
-	static int dijkstra(int[] start) {
-		
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				dist[i][j] = INF;
-			}
-		}
-		
-		PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {
-			return Integer.compare(o1[2], o2[2]);
-		});
-		
-		dist[start[0]][start[1]] = board[start[0]][start[1]];
-		pq.add(new int[] {start[0], start[1], dist[start[0]][start[1]]});
-		
-		while(!pq.isEmpty()) {
-			int[] now = pq.poll();
-			
-			if(now[0] == n-1 && now[1] == n-1) return dist[n-1][n-1];
-			
-			if(visited[now[0]][now[1]]) continue;
-			visited[now[0]][now[1]] = true;
-			
-			for (int i = 0; i < 4; i++) {
-				int r = now[0] + ry[i];
-				int c = now[1] + rx[i];
-				
-				if(r < 0 || c< 0 || r>= n || c>= n) continue;
-				
-				if(dist[r][c] > dist[now[0]][now[1]] + board[r][c]) {
-					dist[r][c] = dist[now[0]][now[1]] + board[r][c];
-					pq.add(new int[] {r, c, dist[r][c]});
+
+	private static int dijkstra() {
+		// TODO Auto-generated method stub
+		dist[0][0] = map[0][0];
+
+		PriorityQueue<Pos> pq = new PriorityQueue<>();
+		pq.add(new Pos(0, 0, -map[0][0]));
+
+		while (!pq.isEmpty()) {
+			Pos p = pq.poll();
+			p.cost = -p.cost;
+
+			for (int k = 0; k < 4; k++) {
+				int tx = p.x + dx[k];
+				int ty = p.y + dy[k];
+
+				if (tx >= 0 && tx < N && ty >= 0 && ty < N) {
+					int tcost = p.cost + map[tx][ty];
+					if (tcost < dist[tx][ty]) {
+						dist[tx][ty] = tcost;
+						pq.add(new Pos(tx, ty, -tcost));
+					}
 				}
 			}
-			
 		}
-		
-		
-//		return dist[n-1][n-1];
-		return -1;
-		
+
+		return dist[N - 1][N - 1];
 	}
+
 }
