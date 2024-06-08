@@ -19,31 +19,6 @@ int getParent(int x) {
 	}
 }
 
-/*
-int find(int a,int b) {
-	a = getParent(a);
-	b = getParent(b);
-
-	if (a == b) {
-		return 1;
-	}
-	else return 0;
-}
-
-void unionParent(int a, int b) {
-	a = getParent(a);
-	b = getParent(b);
-
-	if (a > b) {
-		set[a] = b;
-	}
-	else
-	{
-		set[b] = a;
-	}
-}
-*/
-
 int G, P;
 
 int main() {
