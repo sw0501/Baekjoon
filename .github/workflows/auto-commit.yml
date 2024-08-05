@@ -1,1 +1,43 @@
+name: Auto Commit
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  process_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+
+      - name: Get the latest file
+        id: get_latest_file
+        run: |
+          # 디렉토리나 특정 파일 확장자 등을 필터링하여 필요한 파일만 추출
+          latest_file=$(git log -1 --name-only --pretty=format: | tail -n 1)
+          echo "LATEST_FILE=${latest_file}" >> $GITHUB_ENV
+
+      # - name: Checkout destination repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: ssafy-11th-seoul10/2day-1algo
+      #     token: ${{ secrets.DEST_REPO_TOKEN }}
+      #     path: dest_repo
+
+      # - name: Copy latest file to destination repository
+      #   run: |
+      #     mkdir -p dest_repo/path/to/your/target/directory
+      #     cp ${{ env.LATEST_FILE }} dest_repo/path/to/your/target/directory
+
+      # - name: Commit and push latest file to destination repository
+      #   run: |
+      #     cd dest_repo
+      #     git config --global user.name '${{secret.USER_NAME}}'
+      #     git config --global user.email '${{secret.USER_EMAIL}}'
+      #     git add path/to/your/target/directory/$(basename ${{ env.LATEST_FILE }})
+      #     # 커밋 이름 변경"
+      #     git commit -m "Add latest file from Baekjoon Hub: ${{ env.LATEST_FILE }}"
+      #     git push origin main
