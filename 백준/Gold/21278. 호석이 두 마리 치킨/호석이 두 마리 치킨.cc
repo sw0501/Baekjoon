@@ -17,7 +17,7 @@ int main() {
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= N; j++) {
-			B[i][j] = 10000000;
+			B[i][j] = 1000000;
 			if (i == j)B[i][j] = 0;
 		}
 	}
@@ -28,48 +28,43 @@ int main() {
 		B[a][b] = 1;
 		B[b][a] = 1;
 	}
+	for (int k = 1; k <= N; k++) {
 
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= N; j++) {
-			for (int k = 1; k <= N; k++) {
-				if (i == j)continue;
-				B[i][j] = min(B[i][j],B[i][k] + B[k][j]);
-			}
+			B[i][j] = min(B[i][j], B[i][k] + B[k][j]);
 		}
 	}
-
+	}
+	
 	int a = 101, b = 101;
 	int sum = INT_MAX;
 
 	//2개 고르기
 	for (int i = 1; i <= N; i++){
-		for (int j = i+1; j <= N; j++) {
-			if (i == j)continue;
+		for (int j = 1; j <= N; j++) {
 			//검사
 			int tempSum = 0;
 			for (int k = 1; k <= N; k++) {
-				if (!(k == i || k == j)) {
-					tempSum += min(B[k][i], B[k][j]);
-				}
+				tempSum += 2 * min(B[k][i], B[k][j]);
 			}
 			
 			if (tempSum < sum) {
-				a = i;
-				b = j;
+				a = (i>j?j:i);
+				b = (i > j ? i : j);
 				sum = tempSum;
 			}
 			else if (tempSum == sum) {
-				if (a > i) {
-					a = i;
-				}
-				if (b > j) {
-					b = j;
-				}
+				int mi = (i > j ? j : i);
+				int ma = (i > j ? i : j);
+
+				a = (a > mi ? mi : a);
+				b = (b > ma ? ma : b);
 			}
 		}
 	}
 
-	cout << a << " " << b << " " << sum*2;
+	cout << a << " " << b << " " << sum;
 
 	return 0;
 }
