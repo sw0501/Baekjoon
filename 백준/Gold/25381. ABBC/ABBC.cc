@@ -15,58 +15,28 @@ int main() {
 	//A,B 인덱스
 	queue<int>A;
 	queue<int>B;
+	queue<int>C;
 
 	for (int i = str.length()-1; i >= 0; i--) {
 		if (str[i] == 'A')A.push(i);
 		else if (str[i] == 'B')B.push(i);
+		else if (str[i] == 'C')C.push(i);
 	}
 
 	int cnt = 0;
-
-	//제일 뒤에서부터 탐색
-	for (int i = str.length() - 1; i >= 0; i--) {
-		if (str[i] == 'B') {
-			while (!A.empty() && A.front() >= i) {
-				A.pop();
-			}
-
-			if (!A.empty() && A.front() < i) {
-
-				
-
-				//이미 제거한 A 삭제
-				while (!A.empty() && str[A.front()] != 'A')A.pop();
-
-				if (!A.empty()) {
-					//문자 제거
-					str[A.front()] = ' ';
-					str[i] = ' ';
-					A.pop();
-					cnt++;
-				}
-			}
+	while (!A.empty()) {
+		if (!B.empty() && B.front() > A.front()) {
+			B.pop();
+			cnt++;
 		}
-		else if (str[i] == 'C') {
-			while (!B.empty() && B.front() >= i) {
-				B.pop();
-			}
-
-			if (!B.empty() && B.front() < i) {
-
-				
-
-				//이미 제거한 A 삭제
-				while (!B.empty() && str[B.front()] != 'B')B.pop();
-
-				if (!B.empty()) {
-					//문자 제거
-					str[B.front()] = ' ';
-					str[i] = ' ';
-					B.pop();
-					cnt++;
-				}
-			}
+		A.pop();
+	}
+	while (!B.empty()) {
+		if (!C.empty() && C.front() > B.front()) {
+			C.pop();
+			cnt++;
 		}
+		B.pop();
 	}
 
 	cout << cnt << "\n";
