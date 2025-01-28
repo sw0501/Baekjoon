@@ -44,6 +44,10 @@ void Update(long long node, int start, int end, int index, long long diff) {
 
 int main()
 {
+
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
     int N, M, K;
 
     cin >> N >> M >> K;
