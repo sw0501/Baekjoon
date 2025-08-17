@@ -7,6 +7,10 @@ using namespace std;
 int main(){
     
     while(1){
+        
+        cin.tie(NULL);
+        cout.tie(NULL);
+        ios_base::sync_with_stdio(false);
     
         int score[10001] = {0,};
         
